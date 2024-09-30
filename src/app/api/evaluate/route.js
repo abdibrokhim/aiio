@@ -4,7 +4,7 @@ import OpenAI from "openai";
 const openai = new OpenAI({apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY, dangerouslyAllowBrowser: true});
 
 const systemPrompt = `
-  You will be provided with an original prompt and two user guesses in the following format:
+  You will be provided with an original prompt and one user guess in the following format:
 
   [original prompt]
   <original prompt goes here>
@@ -12,10 +12,7 @@ const systemPrompt = `
   [userA guess]
   <userA guess goes here>
 
-  [userB guess]
-  <userB guess goes here>
-
-  Your task is to evaluate each user guess in relation to the original prompt on a scale from 1 to 10, where:
+  Your task is to evaluate user guess in relation to the original prompt on a scale from 1 to 10, where:
   - 10 means the guess perfectly matches the original prompt.
   - 1 means there is no similarity to the original prompt.
 
@@ -25,8 +22,8 @@ const systemPrompt = `
   3. **Creativity**: The uniqueness and imaginative interpretation of the guess while still relating to the original prompt.
 
   **Output Requirements:**
-  - Return only two whole integer numbers separated by a comma, representing the scores for 'userA' and 'userB' respectively.
-  - Example of correct output format: '4,7'
+  - Return only one whole integer number representing the scores for 'userA'.
+  - Example of correct output format: '4'
   - Do **not** include any additional text, explanations, or formatting.
 
   **Example Input:**
@@ -36,19 +33,16 @@ const systemPrompt = `
   [userA guess]
   A bluebird performs at an outdoor concert with three musicians.
 
-  [userB guess]
-  A crowd enjoys a silent night in the park.
-
   **Expected Output:**
-  7,2
+  7
 `;
 
 
 export async function POST(req) {
     try {
-        const { prompt, userA, userB } = await req.json();
+        const { prompt, userA } = await req.json();
     
-        if (!prompt || !userA || !userB) {
+        if (!prompt || !userA) {
           return NextResponse.json(
             { error: { message: "Missing prompt or user guesses." } },
             { status: 400 }
@@ -61,9 +55,6 @@ export async function POST(req) {
     
         [userA guess]
         ${userA}
-    
-        [userB guess]
-        ${userB}
         `;
     
         const completion = await openai.chat.completions.create({
@@ -74,7 +65,7 @@ export async function POST(req) {
             model: "gpt-4o-mini",
         });
         const rawResponse = completion.choices[0].message.content.trim();
-        const gradePattern = /^\d{1,2},\d{1,2}$/;
+        const gradePattern = /^\d{1,2}$/;
         if (!gradePattern.test(rawResponse)) {
             console.error('Unexpected response format:', rawResponse);
             return NextResponse.json(

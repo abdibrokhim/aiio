@@ -4,7 +4,7 @@
 
 import { useState } from "react";
 
-export default function Home() {
+export default function TestPage() {
   // State variables for the evaluation feature (from previous implementation)
   const [prompt, setPrompt] = useState("");
   const [userAGuess, setUserAGuess] = useState("");
