@@ -1,3 +1,17 @@
+### Game Description
+
+**Harmony Quest** is an engaging multiplayer game that combines creativity, guessing, and social interaction. Players can generate images and audio, then challenge their friends to guess what they are. The first player to join becomes the super user, who creates content and poses questions. Basic users respond, earning points for correct answers. The excitement grows as friends compete for the highest scores!
+
+This game was inspired by a childhood experience where I played similar guessing games with my family. They would make sounds or show images, and I had to guess what they were. **Harmony Quest** brings that nostalgia to life while allowing players to connect online and compete with friends from around the world.
+
+**Future Plans:**
+- **Open Source**: We aim to make the game fully open source, inviting contributions from the community to enhance gameplay.
+- **Video Generation**: We plan to introduce video generation and short animations, allowing users to find specific objects and even draw on them.
+- **Payment Integration**: We will integrate a payment system so users with high rankings can withdraw cash rewards.
+- **Bidding Options**: Users will have the chance to place bids and compete for cash prizes, with the top scorer taking home the pot.
+- **Transaction Fees**: We will implement transaction fees and advanced commercial models to sustain and grow the game.
+
+
 ### TODO:
 
 First, clone the repo:
