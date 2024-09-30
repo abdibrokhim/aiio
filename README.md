@@ -89,3 +89,6 @@ Thank you!
 
 ### Thanks to:
 - [Open Community](https://linkedin.com/company/opencommunity)
+
+### Questions:
+- [LinkedIn](https://linkedin.com/in/abdibrokhim)
